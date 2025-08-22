@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 255 255 255;
+  --fg: 15 23 42;
+  /* slate-900 */
+  --muted: 100 116 139;
+  /* slate-500 */
+  --primary: 124 58 237;
+  /* violet-600 */
+  --accent: 6 182 212;
+  /* cyan-500 */
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  color: rgb(var(--fg));
+  background: rgb(var(--bg));
+}
+
+/* Utilities */
+.container {
+  @apply mx-auto max-w-7xl;
+}
+
+/* Simple focus ring */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2;
+}
+
+/* Hide scrollbar while keeping scroll functionality */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  /* IE/Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  /* Chrome/Safari */
+}
+
+/* --- Bulletproof logo marquee --- */
+@keyframes marquee-x {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+
+  /* shift by one full set */
+}
+
+.marquee {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  /* edge fade so entries don't pop in/out */
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  width: max-content;
+  /* makes the row as wide as its content */
+  will-change: transform;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* If OS prefers reduced motion, we disable unless data-force="1" */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track:not([data-force="1"]) {
+    animation: none !important;
+  }
+}
+
+/* scrollbar helper (optional elsewhere) */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
